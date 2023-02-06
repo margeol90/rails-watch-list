@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Lists</h1>
+
+  <%= link_to "Add new List", "lists/new" %>
+
+  <h2>My Lists</h2>
+
+
+  <% @lists.each do |list| %>
+    <div class="row">
+      <div class="col-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title m-3"><%= list.name %></h5>
+            <button class="btn btn-primary"><%= link_to "View", list_path(list) %></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
