@@ -1,1 +1,32 @@
-<h1><%= @list.name %></h1>
+<div class="container">
+  <div class="row space-between">
+    <div class="col-4">
+      <h1><%= @list.name %></h1>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-warning"><%= link_to "Lists", lists_path %></button>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="card-product">
+    <div class="card-product-infos">
+      <% @list.movies.each do |movie| %>
+        <p>
+          <%= movie.title %>
+        </p>
+        <p>
+          <% movie.bookmarks.each do |bookmark| %>
+          <%= link_to bookmark.comment, bookmark_path(@bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+        <% end %>
+        </p>
+      <% end %>
+    </div>
+    <div>
+      <button><%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+ %></button>
+    </div>
+  </div>
+</div>
