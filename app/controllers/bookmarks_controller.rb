@@ -7,8 +7,9 @@ class BookmarksController < ApplicationController
 
   def create
     @bookmark = Bookmark.new(bookmark_params)
-    # @bookmark.list = set_list
-    # @bookmark.movie_id = @movie.id
+    # @bookmark.list_id = params[:list_id] (not safe to do)
+    # instead do:
+    @bookmark.list = @list
     if @bookmark.save
       redirect_to list_path(@bookmark.list)
     else
@@ -17,8 +18,9 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
+    @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
-    redirect_to list_path(@bookmark.list), status: :see_other
+    redirect_to list_path(@bookmark.list)
   end
 
   private

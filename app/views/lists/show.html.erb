@@ -1,32 +1,26 @@
 <div class="container">
   <div class="row space-between">
     <div class="col-4">
-      <h1><%= @list.name %></h1>
+      <h1><%= @list.name.capitalize %></h1>
     </div>
-    <div class="col-4">
-      <button class="btn btn-warning"><%= link_to "Lists", lists_path %></button>
+    <div class="col-4 m-2">
+      <%= link_to "Lists", lists_path, class: "btn btn-success" %>
+      <%= link_to "Add movie", new_list_bookmark_path(@list), class: "btn btn-primary" %>
+      <%= link_to "Delete List", list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
     </div>
 
   </div>
 
   <hr>
 
-  <div class="card-product">
-    <div class="card-product-infos">
-      <% @list.movies.each do |movie| %>
-        <p>
-          <%= movie.title %>
-        </p>
-        <p>
-          <% movie.bookmarks.each do |bookmark| %>
-          <%= link_to bookmark.comment, bookmark_path(@bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-        <% end %>
-        </p>
-      <% end %>
+  <% @list.bookmarks.each do |bookmark| %>
+    <div class="card m-4">
+      <h3 class="card-header"><%= bookmark.movie.title %></h3>
+      <div class="card-body">
+        <p class="card-title"><%= bookmark.movie.overview%></p>
+        <p class="card-title"><i class="fa-solid fa-star"></i><%= bookmark.movie.rating %></p>
+        <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+      </div>
     </div>
-    <div>
-      <button><%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
- %></button>
-    </div>
-  </div>
+  <% end %>
 </div>
