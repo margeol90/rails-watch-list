@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Add New Bookmark</h1>
+  <h1>Add New Movie</h1>
 
   <%= simple_form_for [@list, @bookmark] do |f| %>
     <%= f.input :comment %>
@@ -7,4 +7,6 @@
     <%#= f.association :list %>
     <%= f.button :submit, class: "btn btn-primary" %>
   <% end %>
+  </br>
+  <%= link_to "Cancel", list_path(@list), class: "btn btn-warning" %>
 </div>

@@ -19,6 +19,7 @@
       <div class="card-body">
         <p class="card-title"><%= bookmark.movie.overview%></p>
         <p class="card-title"><i class="fa-solid fa-star"></i><%= bookmark.movie.rating %></p>
+        <p class="card-title"><i class="fa-solid fa-quote-left"></i> <i><%= bookmark.comment %></i></p>
         <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
       </div>
     </div>
