@@ -25,4 +25,20 @@
       </div>
     </div>
   <% end %>
+
+  <p><b>Reviews:</b></p>
+  <ul>
+    <% @list.reviews.each do |review| %>
+      <li>
+        <%= review.comment %> <%= review.rating%><i class="fa-regular fa-star"></i>
+      </li>
+    <% end %>
+  </ul>
+
+
+  <%= simple_form_for [@list, @review] do |f| %>
+    <%= f.input :comment %>
+    <%= f.input :rating, collection: 0..5 %>
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
 </div>
