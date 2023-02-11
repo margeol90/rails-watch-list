@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row space-between">
     <div class="col-4">
-      <%= cl_image_tag @list.photo.key, height: 100, width: 150, crop: :fill %>
+      <% unless @list.photo.key.nil? %>
+        <%= cl_image_tag @list.photo.key, height: 100, width: 150, crop: :fill %>
+      <% end %>
       <h1><%= @list.name.capitalize %></h1>
     </div>
     <div class="col-4 m-2">
