@@ -14,7 +14,7 @@
 <div class="container">
   <div class="lists">
     <% @lists.each do |list| %>
-      <%= link_to list.name.downcase, list_path(list), class: "list", style: "background-image: url(#{cl_image_path list.photo.key}" if list.photo.attached?)%>
+      <%= link_to list.name.downcase, list_path(list), class: "list", style: ("background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(#{cl_image_path list.photo.key})" if list.photo.attached?) %>
     <% end %>
   </div>
 </div>
