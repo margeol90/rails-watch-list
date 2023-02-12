@@ -1,16 +1,20 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://media.wired.co.uk/photos/606d9ea06a2b7484dab92d37/master/w_1600%2Cc_limit/wired-movie-industry.jpg');">
   <div class="container">
-    <h1>Movie lists</h1>
+    <h1 class="mb-3">Movie lists</h1>
     <p><span data-controller="typed-js"></span></p>
-    <%= link_to "Add New List", new_list_path, class: "btn btn-primary m-3" %>
+    <%= link_to "Add New List", new_list_path, class: "btn btn-primary mt-5" %>
   </div>
 </div>
 
-<% @lists.each do |list| %>
-  <div class="cards m-4">
-
-    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<% cl_image_tag list.photo.key %>)">
-      <%= link_to list.name, list_path(list) %>
+<div class="container">
+  <% @lists.each do |list| %>
+    <div class="row">
+        <div class="cards m-4">
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key %>)">
+            <%= link_to list.name, list_path(list) %>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
