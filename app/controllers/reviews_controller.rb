@@ -4,11 +4,12 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.create(review_params)
     @review.list = @list
-    if @review.save
+    if @review.save!
       redirect_to list_path(@list)
     else
-      render :new
+      render :list
     end
+
   end
 
   private

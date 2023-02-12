@@ -1,21 +1,22 @@
 <div class="container">
-  <div class="row space-between">
-    <div class="col-4">
-      <% unless @list.photo.key.nil? %>
-        <%= cl_image_tag @list.photo.key, height: 100, width: 150, crop: :fill %>
-      <% end %>
-      <h1><%= @list.name.capitalize %></h1>
+  <div class="card-trip">
+    <% unless @list.photo.key.nil? %>
+      <img src='<%= cl_image_path @list.photo.key %>'/>
+    <% end %>
+    <div class="card-trip-infos">
+      <div>
+        <h1><%= @list.name.capitalize %></h1>
+        <p> <%= @list.movies.length %> movies</p>
+      </div>
+      <div class="flex-end">
+        <%= link_to "Lists", lists_path, class: "btn btn-success" %>
+        <%= link_to "Add movie", new_list_bookmark_path(@list), class: "btn btn-primary" %>
+        <%= link_to "Delete List", list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+      </div>
     </div>
-    <div class="col-4 m-2">
-      <%= link_to "Lists", lists_path, class: "btn btn-success" %>
-      <%= link_to "Add movie", new_list_bookmark_path(@list), class: "btn btn-primary" %>
-      <%= link_to "Delete List", list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-    </div>
-
   </div>
 
-  <hr>
-
+  <h3 class="my-3">Movies</h3>
   <% @list.bookmarks.each do |bookmark| %>
     <div class="card m-4">
       <h3 class="card-header"><%= bookmark.movie.title %></h3>
@@ -28,19 +29,28 @@
     </div>
   <% end %>
 
-  <p><b>Reviews:</b></p>
-  <ul>
-    <% @list.reviews.each do |review| %>
-      <li>
-        <%= review.comment %> <%= review.rating%><i class="fa-regular fa-star"></i>
-      </li>
-    <% end %>
-  </ul>
-
-
-  <%= simple_form_for [@list, @review] do |f| %>
-    <%= f.input :comment %>
-    <%= f.input :rating, collection: 0..5 %>
-    <%= f.submit class: "btn btn-primary" %>
-  <% end %>
+  <h3 class="my-3">Reviews</h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <% @list.reviews.each do |review| %>
+          <div class="card p-3">
+            <p><i class="fa-solid fa-quote-left"></i> <i> <%= review.comment %> </i></p>
+            <p> <%= review.rating%><i class="fa-regular fa-star"></i></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <div class="bg-white border p-3 sticky-top">
+          <div class="row justify-content-center">
+            <%= simple_form_for [@list, @review] do |f| %>
+              <%= f.input :comment %>
+              <%= f.input :rating, collection: 0..5 %>
+              <%= f.submit class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

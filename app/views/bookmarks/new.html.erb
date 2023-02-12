@@ -1,12 +1,14 @@
 <div class="container">
-  <h1>Add New Movie</h1>
-
-  <%= simple_form_for [@list, @bookmark] do |f| %>
-    <%= f.input :comment %>
-    <%= f.association :movie %>
-    <%#= f.association :list %>
-    <%= f.button :submit, class: "btn btn-primary" %>
-  <% end %>
-  </br>
-  <%= link_to "Cancel", list_path(@list), class: "btn btn-warning" %>
+  <h1 class="text-center mt-4">Add New Movie</h1>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.input :comment %>
+        <%= f.association :movie %>
+        <%= f.button :submit, class: "btn btn-primary" %>
+      <% end %>
+      <br/>
+      <%= link_to "Cancel", list_path(@list), class: "btn btn-warning" %>
+    </div>
+  </div>
 </div>
