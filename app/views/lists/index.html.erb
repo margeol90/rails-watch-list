@@ -13,8 +13,10 @@
 
 <div class="container">
   <div class="lists">
-    <% @lists.each do |list| %>
-      <%= link_to list.name.downcase, list_path(list), class: "list", style: "background-image: url(#{cl_image_path list.photo.key})" %>
+    <% unless @lists.nil? %>
+      <% @lists.each do |list| %>
+        <%= link_to list.name.downcase, list_path(list), class: "list", style: "background-image: url(#{cl_image_path list.photo.key})" %>
+      <% end %>
     <% end %>
   </div>
 </div>
